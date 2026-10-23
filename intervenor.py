@@ -1,15 +1,12 @@
 import json
 from tqdm import tqdm
-import openai
-import backoff
 import os
-import numpy as np
 from typing import Iterable, Dict
 import gzip
 import json
 import os
 import argparse
-from agents.gpt.gpt_wrapper import GPTAgent
+from pathlib import Path
 
 GEN_STOP_WORDS = {
     "python":['def'],
@@ -77,6 +74,7 @@ def print_options(args,parser):
 
 
 def code_generation(problems,args):
+    from agents.gpt.gpt_wrapper import GPTAgent
     generator = GPTAgent(args.model)
     stop = GEN_STOP_WORDS[args.language]
     samples = []
@@ -100,7 +98,7 @@ def code_generation(problems,args):
 
 
 def get_cor_prompt(buggy_code,error_message):
-    with open('./prompt/code_teacher.txt', 'r') as f:
+    with open(Path(__file__).resolve().parent / 'prompt/code_teacher.txt', 'r') as f:
         prompt = f.read()
 
     prompt = prompt.replace("%%%buggy_code%%%",buggy_code)
@@ -108,6 +106,7 @@ def get_cor_prompt(buggy_code,error_message):
     return prompt
 
 def cor_generation(problems,results,args):
+    from agents.gpt.gpt_wrapper import GPTAgent
     generator = GPTAgent(args.model)
     stop = COR_STOP_WORDS[args.language]
     samples = []
@@ -134,7 +133,7 @@ def cor_generation(problems,results,args):
     write_jsonl(save_path, samples)
 
 def get_repair_prompt(buggy_code,error_message,repair_method,code_signature):
-    with open('./prompt/code_learner.txt', 'r') as f:
+    with open(Path(__file__).resolve().parent / 'prompt/code_learner.txt', 'r') as f:
         prompt = f.read()
 
     prompt = prompt.replace("%%%buggy_code%%%", buggy_code)
@@ -143,6 +142,7 @@ def get_repair_prompt(buggy_code,error_message,repair_method,code_signature):
     prompt = prompt +"\n\n"+code_signature
     return prompt
 def code_reapiring(problems,results,args):
+    from agents.gpt.gpt_wrapper import GPTAgent
     generator = GPTAgent(args.model)
     stop = GEN_STOP_WORDS[args.language]
     samples = []
