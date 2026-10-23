@@ -7,7 +7,7 @@ import re
 from intervenor import get_cor_prompt, get_repair_prompt
 
 
-PUBLIC_FIELDS = {'problem_id', 'entry_point', 'prompt', 'tests', 'dataset', 'testtype'}
+PUBLIC_FIELDS = {'problem_id', 'entry_point', 'prompt', 'tests', 'dataset', 'testtype', 'public_imports'}
 
 
 def extract(response, public):
