@@ -1,0 +1,6 @@
+# Match the exact working-file bytes used by the accepted experiment.
+# Do not run a bulk renormalization: the frozen files deliberately differ.
+intervenor.py text eol=crlf
+public_adapter.py text eol=lf
+prompt/code_teacher.txt text eol=crlf
+prompt/code_learner.txt text eol=crlf
