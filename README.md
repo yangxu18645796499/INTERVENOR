@@ -13,13 +13,13 @@ Source code for ACL 2024 paper [INTERVENOR : Prompt the Coding Ability of Large 
 
 本轮适配入口是`public_adapter.py`：接收共享E0初始代码，只使用公开题面、公开样例和公开执行反馈。模型传输、候选隔离及独立隐藏评分由[self-debug](https://github.com/yangxu18645796499/self-debug)统一承担；本仓库不重复存放题库和实验结果。
 
-- [三组完整实验报告](https://github.com/yangxu18645796499/self-debug/blob/main/docs/实验结果汇总.md)：HumanEval／HE+、MBPP-500／MBPP+、LiveCodeBench、ClassEval。
+- [四方法完整实验报告](https://github.com/yangxu18645796499/self-debug/blob/main/docs/实验结果汇总.md)：HumanEval／HE+、MBPP-500／MBPP+、LiveCodeBench、ClassEval。
 - [改造、冻结与运行说明](https://github.com/yangxu18645796499/self-debug/blob/main/docs/intervenor/改造与运行说明.md)。
 - [TraceCoder对比方法](https://github.com/yangxu18645796499/TraceCoder)：独立保留原轨迹方法，不与本方法混写。
 
 本轮实际方法源码提交为`53945b2`，基于上游`45c3e461f1c169baf9e412733ec8548f58ab1713`；后续发布说明和Git属性提交不改变已完成实验的冻结版本。四个冻结文件的逐文件换行规则仅保持当时字节，不批量格式化代码。
 
-模型调用为官方DeepSeek `deepseek-flash`，关闭thinking、1024输出tokens、temperature=0.2、180秒、串行、重试0。E0、INTERVENOR和TraceCoder共享初始代码；隐藏结果不返回给模型或停止判断。完整批次已结束，克隆仓库不会自动调用API。
+模型调用为官方DeepSeek `deepseek-flash`，关闭thinking、1024输出tokens、temperature=0.2、180秒、串行、重试0。E0、SELF-DEBUG、INTERVENOR和TraceCoder共享初始代码；隐藏结果不返回给模型或停止判断。完整批次已结束，克隆仓库不会自动调用API。
 
 以下保留原作者的背景与旧复现说明，不是本轮安全运行入口。**不要照旧教程把密钥写入源码，也不要直接用原隐藏评测反馈调试。** 本轮凭证仅由self-debug通过内存传递；原始命令中的模型、数据和预算不代表本轮配置。保留原作者及现有许可文件，不新增仓库级许可证声明。
 
@@ -180,3 +180,7 @@ If you use our code or our data for your research, feel free to cite our publica
 ## Contact
 
 Please send email to [wanghanbinpanda@gmail.com](mailto:wanghanbinpanda@gmail.com).
+
+## 2026-10-27整理说明
+
+本仓库只保留原方法及公开输入适配，完整数据和四方法成绩统一放在self-debug。新增SELF-DEBUG方法独立位于https://github.com/yangxu18645796499/SelfDebug_prompts_in_TraceCoder ，没有改写本方法。此次只更新说明、移除IDE配置，不修改实际算法、prompt或已完成实验结果。旧文件树保存在本地`codex/archive-before-main-review-20261027`分支。当前整理分支等待用户确认后再合并main和推送。

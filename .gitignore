@@ -3,3 +3,6 @@ __pycache__/
 .env*
 *.sqlite*
 *.log
+
+# Local IDE metadata is not a method artifact.
+.idea/

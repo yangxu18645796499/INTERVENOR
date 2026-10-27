@@ -4,3 +4,6 @@ intervenor.py text eol=crlf
 public_adapter.py text eol=lf
 prompt/code_teacher.txt text eol=crlf
 prompt/code_learner.txt text eol=crlf
+README.md text eol=lf
+.gitignore text eol=lf
+tests/test_public_adapter.py text eol=lf
